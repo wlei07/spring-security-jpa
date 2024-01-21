@@ -1,0 +1,16 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: fa55a010ac6072cd569a
+            clientSecret: 0649fc353416f30c6c0a2e81002716a3a6d7df13
+          google:
+            client-id: 940725968529-9qkgi7vbl9ch97q9dp9qckbnm492ne0k.apps.googleusercontent.com
+            client-secret: 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
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
