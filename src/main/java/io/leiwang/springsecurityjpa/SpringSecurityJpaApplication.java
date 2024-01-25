@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackageClasses = {FilterComponentPackage.class, SpringSecurityJpaApplication.class})
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
 public class SpringSecurityJpaApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SpringSecurityJpaApplication.class, args);
     }
