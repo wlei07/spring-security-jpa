@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -46,15 +47,15 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/", "/index.html", "/error", "/webjars/**").permitAll()
+                                .requestMatchers("/", "/index.html", "/error", "/webjars/**", "/posts/**").permitAll()
                                 .requestMatchers("/admin").hasRole(ADMIN_ROLE)
                                 .requestMatchers("/user").hasAnyRole("USER", ADMIN_ROLE)
                                 .requestMatchers("/users/me").hasAnyRole("USER", ADMIN_ROLE)
                                 .anyRequest().authenticated()
                 )
-                .csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).csrfTokenRequestHandler(delegate::handle))
+                //.csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).csrfTokenRequestHandler(delegate::handle))
                 // disabling CSRF
-                //.csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
                 // success handler does not work...
                 .oauth2Login(customizer -> customizer
                         .successHandler(new AddCsrfToLoginSuccessResponseHandler())
