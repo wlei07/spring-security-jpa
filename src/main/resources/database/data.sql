@@ -1,3 +1,5 @@
+create database spring_security_jpa;
+use spring_security_jpa;
 -- MySQL dump 10.13  Distrib 8.1.0, for macos13.3 (arm64)
 --
 -- Host: localhost    Database: springsecurity
