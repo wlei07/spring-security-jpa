@@ -33,7 +33,7 @@ public class PostController {
     }
 
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
+    public synchronized Post createPost(@RequestBody Post post) {
         if (posts.values().stream().map(Post::title).collect(Collectors.toSet()).contains(post.title())) {
             throw new ResponseStatusException(BAD_REQUEST, "Post is duplicated.");
         }
