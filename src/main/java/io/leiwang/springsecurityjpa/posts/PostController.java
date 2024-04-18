@@ -20,11 +20,11 @@ public class PostController {
 
     @PostConstruct
     public void initialize() {
-        posts.put(1, new Post(1, 1, "title1", "body1"));
-        posts.put(2, new Post(2, 2, "title2", "body2"));
-        posts.put(3, new Post(3, 3, "title3", "body3"));
-        posts.put(4, new Post(4, 4, "title4", "body4"));
-        posts.put(5, new Post(5, 5, "title5", "body5"));
+        posts.put(1, new Post(1, "title1"));
+        posts.put(2, new Post(2, "title2"));
+        posts.put(3, new Post(3, "title3"));
+        posts.put(4, new Post(4, "title4"));
+        posts.put(5, new Post(5, "title5"));
     }
 
     @GetMapping
@@ -38,7 +38,7 @@ public class PostController {
             throw new ResponseStatusException(BAD_REQUEST, "Post is duplicated.");
         }
         int postId = posts.keySet().stream().max(Integer::compare).orElse(1);
-        Post postToBeSaved = new Post(post.userid(), postId, post.title(), post.body());
+        Post postToBeSaved = new Post(postId, post.title());
         posts.put(postId, postToBeSaved);
         return postToBeSaved;
     }
